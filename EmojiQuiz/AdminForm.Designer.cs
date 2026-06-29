@@ -31,11 +31,63 @@ partial class AdminForm
     /// </summary>
     private void InitializeComponent()
     {
-        this.components = new System.ComponentModel.Container();
-        this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        this.ClientSize = new System.Drawing.Size(800, 450);
-        this.Text = "AdminForm";
+        textEmoji = new System.Windows.Forms.TextBox();
+        textAnswer = new System.Windows.Forms.TextBox();
+        textCategory = new System.Windows.Forms.TextBox();
+        buttonAdd = new System.Windows.Forms.Button();
+        SuspendLayout();
+        // 
+        // textEmoji
+        // 
+        textEmoji.Location = new System.Drawing.Point(123, 44);
+        textEmoji.Name = "textEmoji";
+        textEmoji.Size = new System.Drawing.Size(160, 27);
+        textEmoji.TabIndex = 0;
+        // 
+        // textAnswer
+        // 
+        textAnswer.Location = new System.Drawing.Point(123, 96);
+        textAnswer.Name = "textAnswer";
+        textAnswer.Size = new System.Drawing.Size(159, 27);
+        textAnswer.TabIndex = 1;
+        // 
+        // textCategory
+        // 
+        textCategory.Location = new System.Drawing.Point(123, 152);
+        textCategory.Name = "textCategory";
+        textCategory.Size = new System.Drawing.Size(159, 27);
+        textCategory.TabIndex = 2;
+        // 
+        // buttonAdd
+        // 
+        buttonAdd.Location = new System.Drawing.Point(217, 262);
+        buttonAdd.Name = "buttonAdd";
+        buttonAdd.Size = new System.Drawing.Size(186, 49);
+        buttonAdd.TabIndex = 3;
+        buttonAdd.Text = "Добавить";
+        buttonAdd.UseVisualStyleBackColor = true;
+        // 
+        // AdminForm
+        // 
+        AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+        AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+        ClientSize = new System.Drawing.Size(800, 450);
+        Controls.Add(buttonAdd);
+        Controls.Add(textCategory);
+        Controls.Add(textAnswer);
+        Controls.Add(textEmoji);
+        Text = "AdminForm";
+        ResumeLayout(false);
+        PerformLayout();
     }
+
+    private System.Windows.Forms.Button buttonAdd;
+
+    private System.Windows.Forms.TextBox textCategory;
+
+    private System.Windows.Forms.TextBox textAnswer;
+
+    private System.Windows.Forms.TextBox textEmoji;
 
     #endregion
 }

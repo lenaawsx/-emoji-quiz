@@ -21,4 +21,10 @@
       </Compile>
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="movies_ru_emoji.tsv">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>

@@ -6,4 +6,23 @@ public partial class AdminForm : Form
     {
         InitializeComponent();
     }
+
+    private void buttonAdd_Click(object sender, EventArgs e)
+    {
+        string emoji  = textEmoji.Text.Trim();    // Trim убирает пробелы по краям
+        string answer = textAnswer.Text.Trim();
+        string cat    = textCategory.Text.Trim();
+
+        if (emoji == "" || answer == "")
+        {
+            MessageBox.Show("Заполните эмодзи и ответ.");
+            return;
+        }
+
+        Db.Add(emoji, answer, cat);
+        MessageBox.Show("Добавлено.");
+        textEmoji.Clear();
+        textAnswer.Clear();
+        textCategory.Clear();
+    }
 }
