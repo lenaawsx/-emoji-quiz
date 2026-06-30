@@ -41,6 +41,7 @@ partial class GameForm
         labelResult = new System.Windows.Forms.Label();
         timer1 = new System.Windows.Forms.Timer(components);
         labelTime = new System.Windows.Forms.Label();
+        labelStatus = new System.Windows.Forms.Label();
         SuspendLayout();
         // 
         // labelEmoji
@@ -95,7 +96,7 @@ partial class GameForm
         // 
         labelScore.Location = new System.Drawing.Point(72, 361);
         labelScore.Name = "labelScore";
-        labelScore.Size = new System.Drawing.Size(135, 27);
+        labelScore.Size = new System.Drawing.Size(398, 44);
         labelScore.TabIndex = 5;
         labelScore.Text = "Счёт: 0";
         // 
@@ -119,11 +120,20 @@ partial class GameForm
         labelTime.Size = new System.Drawing.Size(103, 30);
         labelTime.TabIndex = 7;
         // 
+        // labelStatus
+        // 
+        labelStatus.Location = new System.Drawing.Point(322, 377);
+        labelStatus.Name = "labelStatus";
+        labelStatus.Size = new System.Drawing.Size(148, 28);
+        labelStatus.TabIndex = 8;
+        labelStatus.Text = "\r\n";
+        // 
         // GameForm
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        ClientSize = new System.Drawing.Size(800, 450);
+        ClientSize = new System.Drawing.Size(800, 484);
+        Controls.Add(labelStatus);
         Controls.Add(labelTime);
         Controls.Add(labelResult);
         Controls.Add(labelScore);
@@ -135,6 +145,8 @@ partial class GameForm
         Text = "GameForm";
         ResumeLayout(false);
     }
+
+    private System.Windows.Forms.Label labelStatus;
 
     private System.Windows.Forms.Label labelTime;
 

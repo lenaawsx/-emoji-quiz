@@ -29,20 +29,21 @@ partial class MainForm
     /// </summary>
     private void InitializeComponent()
     {
-        buttonPlay = new System.Windows.Forms.Button();
+        btnSinglePlayer = new System.Windows.Forms.Button();
         buttonAdmin = new System.Windows.Forms.Button();
         comboBox1 = new System.Windows.Forms.ComboBox();
+        btnTwoPlayer = new System.Windows.Forms.Button();
         SuspendLayout();
         // 
-        // buttonPlay
+        // btnSinglePlayer
         // 
-        buttonPlay.Location = new System.Drawing.Point(298, 157);
-        buttonPlay.Name = "buttonPlay";
-        buttonPlay.Size = new System.Drawing.Size(213, 74);
-        buttonPlay.TabIndex = 0;
-        buttonPlay.Text = "Играть";
-        buttonPlay.UseVisualStyleBackColor = true;
-        buttonPlay.Click += buttonPlay_Click;
+        btnSinglePlayer.Location = new System.Drawing.Point(297, 91);
+        btnSinglePlayer.Name = "btnSinglePlayer";
+        btnSinglePlayer.Size = new System.Drawing.Size(213, 74);
+        btnSinglePlayer.TabIndex = 0;
+        btnSinglePlayer.Text = "Игра на одного ";
+        btnSinglePlayer.UseVisualStyleBackColor = true;
+        btnSinglePlayer.Click += btnSinglePlayer_Click;
         // 
         // buttonAdmin
         // 
@@ -63,21 +64,34 @@ partial class MainForm
         comboBox1.Size = new System.Drawing.Size(197, 28);
         comboBox1.TabIndex = 2;
         // 
+        // btnTwoPlayer
+        // 
+        btnTwoPlayer.Location = new System.Drawing.Point(297, 188);
+        btnTwoPlayer.Name = "btnTwoPlayer";
+        btnTwoPlayer.Size = new System.Drawing.Size(212, 50);
+        btnTwoPlayer.TabIndex = 3;
+        btnTwoPlayer.Text = "Игра на двоих";
+        btnTwoPlayer.UseVisualStyleBackColor = true;
+        btnTwoPlayer.Click += btnTwoPlayer_Click_1;
+        // 
         // MainForm
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         ClientSize = new System.Drawing.Size(800, 450);
+        Controls.Add(btnTwoPlayer);
         Controls.Add(comboBox1);
         Controls.Add(buttonAdmin);
-        Controls.Add(buttonPlay);
+        Controls.Add(btnSinglePlayer);
         Text = "Form1";
         ResumeLayout(false);
     }
 
+    private System.Windows.Forms.Button btnTwoPlayer;
+
     private System.Windows.Forms.ComboBox comboBox1;
 
-    private System.Windows.Forms.Button buttonPlay;
+    private System.Windows.Forms.Button btnSinglePlayer;
     private System.Windows.Forms.Button buttonAdmin;
 
     #endregion

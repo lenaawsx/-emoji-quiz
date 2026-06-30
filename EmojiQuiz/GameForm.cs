@@ -4,12 +4,7 @@ public partial class GameForm : Form
 {
     int timeLeft = 15;
     string currentCategory = "Все";
-    public void SetCategory(string category)
-    
-    {
-        currentCategory = category;
-        NextQuestion();
-    }
+    bool isTwoPlayerMode = false;
     public GameForm()
     {
         InitializeComponent();
@@ -18,16 +13,25 @@ public partial class GameForm : Form
         NextQuestion();
         
     }
-    public GameForm(string category)
+    public GameForm(string category, bool isTwoPlayerMode)
     {
         InitializeComponent();
-        currentCategory = category;
+        currentCategory = category; 
+        this.isTwoPlayerMode = isTwoPlayerMode;
+        if (!isTwoPlayerMode)
+        {
+            labelStatus.Visible = false;
+        }
+
         NextQuestion();
     }
    
     static readonly Random rng = new();
     Question? current;   // знак вопроса: пока вопрос не выбран, тут может быть «ничего» (null)
-    int score = 0;
+    int score1 = 0;
+    int score2 = 0;
+    int currentPlayer = 1;
+    int questionsAnswered = 0;
     int totalQuestions = 0; 
 
     void NextQuestion()
@@ -67,32 +71,59 @@ public partial class GameForm : Form
     void CheckAnswer(string chosen)
     {
         timer1.Stop();
-        totalQuestions++;
-        if (current == null) return;   // вопроса нет (база пустая) — ничего не проверяем
+        if (current == null) return;
 
         if (chosen == current.Answer)
         {
-            score++;
-            labelResult.Text = "Верно";
+            labelResult.Text = "Верно!";
+            if (isTwoPlayerMode)
+            {
+                if (currentPlayer == 1) score1++;
+                else score2++;
+            }
+            else
+            {
+                score1++;
+            }
         }
         else
         {
-            labelResult.Text = "Неверно, это " + current.Answer;
+            labelResult.Text = "Ошибка, это " + current.Answer;
         }
-        labelScore.Text = "Счёт: " + score;
-        if (totalQuestions >= 10) // Например, игра до 10 вопросов
+
+        if (isTwoPlayerMode)
         {
-            ShowResult();
-            return;
+            labelScore.Text = $"Счёт: Игрок 1 - {score1}, Игрок 2 - {score2}";
+            // Переключаем игрока ТОЛЬКО ПОСЛЕ ответа
+            currentPlayer = (currentPlayer == 1) ? 2 : 1;
+            labelStatus.Text = "Ход игрока: " + currentPlayer;
+        }
+        else
+        {
+            labelScore.Text = "Счёт: " + score1;
+        }
+
+        questionsAnswered++;
+        if (questionsAnswered >= 10) 
+        { 
+            ShowResult(); 
+            return; 
         }
         NextQuestion();
     }
     void ShowResult()
     {
-        double percent = (double)score / totalQuestions * 100;
-        MessageBox.Show($"Игра окончена!\n\nВерных ответов: {score} из {totalQuestions}\nПроцент: {percent:F1}%", 
-            "Результаты");
-        this.Close(); 
+        timer1.Stop();
+        if (isTwoPlayerMode)
+        {
+            MessageBox.Show($"Игра окончена!\n\nИгрок 1: {score1} очков\nИгрок 2: {score2} очков", "Результаты");
+        }
+        else
+        {
+            double percent = (double)score1 / questionsAnswered * 100;
+            MessageBox.Show($"Игра окончена!\n\nВерных ответов: {score1} из {questionsAnswered}\nПроцент: {percent:F1}%", "Результаты");
+        }
+        this.Close();
     }
     void Shuffle(List<string> list)
     {
@@ -132,6 +163,11 @@ public partial class GameForm : Form
         {
             timer1.Stop();
             labelResult.Text = "Время вышло!";
+            if (isTwoPlayerMode)
+            {
+                currentPlayer = (currentPlayer == 1) ? 2 : 1;
+                labelStatus.Text = "Ход игрока: " + currentPlayer;
+            }
             NextQuestion(); 
         }
     }
