@@ -28,6 +28,7 @@ public partial class GameForm : Form
     static readonly Random rng = new();
     Question? current;   // знак вопроса: пока вопрос не выбран, тут может быть «ничего» (null)
     int score = 0;
+    int totalQuestions = 0; 
 
     void NextQuestion()
     {
@@ -62,10 +63,11 @@ public partial class GameForm : Form
         }
     }
 
-// общий обработчик для всех четырёх кнопок
+
     void CheckAnswer(string chosen)
     {
         timer1.Stop();
+        totalQuestions++;
         if (current == null) return;   // вопроса нет (база пустая) — ничего не проверяем
 
         if (chosen == current.Answer)
@@ -78,9 +80,20 @@ public partial class GameForm : Form
             labelResult.Text = "Неверно, это " + current.Answer;
         }
         labelScore.Text = "Счёт: " + score;
+        if (totalQuestions >= 10) // Например, игра до 10 вопросов
+        {
+            ShowResult();
+            return;
+        }
         NextQuestion();
     }
-
+    void ShowResult()
+    {
+        double percent = (double)score / totalQuestions * 100;
+        MessageBox.Show($"Игра окончена!\n\nВерных ответов: {score} из {totalQuestions}\nПроцент: {percent:F1}%", 
+            "Результаты");
+        this.Close(); 
+    }
     void Shuffle(List<string> list)
     {
         for (int i = list.Count - 1; i > 0; i--)
