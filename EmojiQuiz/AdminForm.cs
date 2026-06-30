@@ -18,6 +18,11 @@ public partial class AdminForm : Form
             MessageBox.Show("Заполните эмодзи и ответ.");
             return;
         }
+        if (Db.Exists(answer))
+        {
+            MessageBox.Show("Такой фильм уже есть.");
+            return;
+        }
 
         Db.Add(emoji, answer, cat);
         MessageBox.Show("Добавлено.");

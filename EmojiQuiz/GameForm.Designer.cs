@@ -31,6 +31,7 @@ partial class GameForm
     /// </summary>
     private void InitializeComponent()
     {
+        components = new System.ComponentModel.Container();
         labelEmoji = new System.Windows.Forms.Label();
         button1 = new System.Windows.Forms.Button();
         button2 = new System.Windows.Forms.Button();
@@ -38,21 +39,23 @@ partial class GameForm
         button4 = new System.Windows.Forms.Button();
         labelScore = new System.Windows.Forms.Label();
         labelResult = new System.Windows.Forms.Label();
+        timer1 = new System.Windows.Forms.Timer(components);
+        labelTime = new System.Windows.Forms.Label();
         SuspendLayout();
         // 
         // labelEmoji
         // 
         labelEmoji.Font = new System.Drawing.Font("Segoe UI Emoji", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)0));
-        labelEmoji.Location = new System.Drawing.Point(264, 98);
+        labelEmoji.Location = new System.Drawing.Point(72, 98);
         labelEmoji.Name = "labelEmoji";
-        labelEmoji.Size = new System.Drawing.Size(310, 63);
+        labelEmoji.Size = new System.Drawing.Size(691, 139);
         labelEmoji.TabIndex = 0;
         // 
         // button1
         // 
         button1.Location = new System.Drawing.Point(60, 261);
         button1.Name = "button1";
-        button1.Size = new System.Drawing.Size(139, 52);
+        button1.Size = new System.Drawing.Size(167, 68);
         button1.TabIndex = 1;
         button1.Text = "button1";
         button1.UseVisualStyleBackColor = true;
@@ -62,7 +65,7 @@ partial class GameForm
         // 
         button2.Location = new System.Drawing.Point(249, 261);
         button2.Name = "button2";
-        button2.Size = new System.Drawing.Size(146, 51);
+        button2.Size = new System.Drawing.Size(163, 68);
         button2.TabIndex = 2;
         button2.Text = "button2";
         button2.UseVisualStyleBackColor = true;
@@ -72,7 +75,7 @@ partial class GameForm
         // 
         button3.Location = new System.Drawing.Point(436, 261);
         button3.Name = "button3";
-        button3.Size = new System.Drawing.Size(144, 51);
+        button3.Size = new System.Drawing.Size(166, 68);
         button3.TabIndex = 3;
         button3.Text = "button3";
         button3.UseVisualStyleBackColor = true;
@@ -82,7 +85,7 @@ partial class GameForm
         // 
         button4.Location = new System.Drawing.Point(626, 261);
         button4.Name = "button4";
-        button4.Size = new System.Drawing.Size(142, 50);
+        button4.Size = new System.Drawing.Size(162, 68);
         button4.TabIndex = 4;
         button4.Text = "button4";
         button4.UseVisualStyleBackColor = true;
@@ -100,14 +103,28 @@ partial class GameForm
         // 
         labelResult.Location = new System.Drawing.Point(509, 366);
         labelResult.Name = "labelResult";
-        labelResult.Size = new System.Drawing.Size(168, 32);
+        labelResult.Size = new System.Drawing.Size(279, 75);
         labelResult.TabIndex = 6;
+        // 
+        // timer1
+        // 
+        timer1.Enabled = true;
+        timer1.Interval = 1000;
+        timer1.Tick += timer1_Tick;
+        // 
+        // labelTime
+        // 
+        labelTime.Location = new System.Drawing.Point(70, 392);
+        labelTime.Name = "labelTime";
+        labelTime.Size = new System.Drawing.Size(103, 30);
+        labelTime.TabIndex = 7;
         // 
         // GameForm
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         ClientSize = new System.Drawing.Size(800, 450);
+        Controls.Add(labelTime);
         Controls.Add(labelResult);
         Controls.Add(labelScore);
         Controls.Add(button4);
@@ -118,6 +135,10 @@ partial class GameForm
         Text = "GameForm";
         ResumeLayout(false);
     }
+
+    private System.Windows.Forms.Label labelTime;
+
+    private System.Windows.Forms.Timer timer1;
 
     private System.Windows.Forms.Label labelResult;
 

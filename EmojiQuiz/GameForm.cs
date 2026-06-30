@@ -2,18 +2,39 @@ namespace EmojiQuiz;
 
 public partial class GameForm : Form
 {
+    int timeLeft = 15;
+    string currentCategory = "Все";
+    public void SetCategory(string category)
+    
+    {
+        currentCategory = category;
+        NextQuestion();
+    }
     public GameForm()
     {
         InitializeComponent();
+        timer1.Interval = 1000;
+        timer1.Tick += timer1_Tick;
+        NextQuestion();
+        
+    }
+    public GameForm(string category)
+    {
+        InitializeComponent();
+        currentCategory = category;
         NextQuestion();
     }
+   
     static readonly Random rng = new();
     Question? current;   // знак вопроса: пока вопрос не выбран, тут может быть «ничего» (null)
     int score = 0;
 
     void NextQuestion()
     {
-        current = Db.GetRandom();
+        timeLeft = 15;
+        timer1.Start();
+        labelTime.Text = "Время: " + timeLeft;
+        current = Db.GetRandom(currentCategory);
         if (current == null) { labelEmoji.Text = "База пуста"; return; }
 
         labelEmoji.Text = current.Emoji;
@@ -44,6 +65,7 @@ public partial class GameForm : Form
 // общий обработчик для всех четырёх кнопок
     void CheckAnswer(string chosen)
     {
+        timer1.Stop();
         if (current == null) return;   // вопроса нет (база пустая) — ничего не проверяем
 
         if (chosen == current.Answer)
@@ -86,5 +108,18 @@ public partial class GameForm : Form
     private void button4_Click(object sender, EventArgs e)
     {
         CheckAnswer(button4.Text);
+    }
+
+    private void timer1_Tick(object sender, EventArgs e)
+    {
+        timeLeft--;
+        labelTime.Text = "Время: " + timeLeft;
+
+        if (timeLeft <= 0)
+        {
+            timer1.Stop();
+            labelResult.Text = "Время вышло!";
+            NextQuestion(); 
+        }
     }
 }

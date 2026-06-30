@@ -33,6 +33,24 @@ static class Db
             .OrderBy(q => EF.Functions.Random())
             .FirstOrDefault();   // вернёт null, если база пустая
     }
+    public static Question? GetRandom(string category)
+    {
+        using var ctx = new QuizContext();
+        if (category == "Все") return GetRandom();
+        return ctx.Questions
+            .Where(q => q.Category == category)
+            .OrderBy(q => EF.Functions.Random())
+            .FirstOrDefault();
+    }
+    public static List<string> GetCategories()
+    {
+        using var ctx = new QuizContext();
+        return ctx.Questions
+            .Select(q => q.Category)
+            .Distinct()
+            .Where(c => !string.IsNullOrEmpty(c))
+            .ToList();
+    }
 
     // Несколько случайных НЕправильных ответов — для вариантов выбора.
     public static List<string> GetWrongAnswers(string correct, int count)
@@ -49,14 +67,21 @@ static class Db
     // Заполнить базу из файла этапа 1. Запускается один раз, если база пустая.
     public static void SeedFromFile(string path)
     {
-        if (Count() > 0) return;                  // уже заполнено, выходим
+        if (Count() > 0) return;                  
         using var ctx = new QuizContext();
-        foreach (var line in File.ReadLines(path).Skip(1))   // Skip(1) пропускает строку-заголовок
+        foreach (var line in File.ReadLines(path).Skip(1))  
         {
-            var p = line.Split('\t');             // колонки: tconst, title_ru, emoji
-            if (p.Length < 3) continue;           // битую строку пропускаем
-            ctx.Questions.Add(new Question { Emoji = p[2], Answer = p[1], Category = "Фильмы" });
+            var p = line.Split('\t');            
+            if (p.Length < 3) continue;         
+            ctx.Questions.Add(new Question { Emoji = p[2], Answer = p[1], Category = p[3] });
         }
-        ctx.SaveChanges();                        // один раз сохраняем все добавленные строки
+        ctx.SaveChanges();                     
+    }
+    public static bool Exists(string answer)
+    {
+        using (var db = new QuizContext())
+        {
+            return db.Questions.Any(q => q.Answer == answer);
+        }
     }
 }

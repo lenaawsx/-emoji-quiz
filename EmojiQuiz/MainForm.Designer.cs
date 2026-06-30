@@ -31,6 +31,7 @@ partial class MainForm
     {
         buttonPlay = new System.Windows.Forms.Button();
         buttonAdmin = new System.Windows.Forms.Button();
+        comboBox1 = new System.Windows.Forms.ComboBox();
         SuspendLayout();
         // 
         // buttonPlay
@@ -53,16 +54,28 @@ partial class MainForm
         buttonAdmin.UseVisualStyleBackColor = true;
         buttonAdmin.Click += buttonAdmin_Click;
         // 
+        // comboBox1
+        // 
+        comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+        comboBox1.FormattingEnabled = true;
+        comboBox1.Location = new System.Drawing.Point(313, 365);
+        comboBox1.Name = "comboBox1";
+        comboBox1.Size = new System.Drawing.Size(197, 28);
+        comboBox1.TabIndex = 2;
+        // 
         // MainForm
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         ClientSize = new System.Drawing.Size(800, 450);
+        Controls.Add(comboBox1);
         Controls.Add(buttonAdmin);
         Controls.Add(buttonPlay);
         Text = "Form1";
         ResumeLayout(false);
     }
+
+    private System.Windows.Forms.ComboBox comboBox1;
 
     private System.Windows.Forms.Button buttonPlay;
     private System.Windows.Forms.Button buttonAdmin;
